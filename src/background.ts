@@ -13,5 +13,5 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
 });
 
 chrome.runtime.onInstalled.addListener(() => {
-  console.log('PriceRadar AI installed');
+  console.log('PriceHawk installed');
 });

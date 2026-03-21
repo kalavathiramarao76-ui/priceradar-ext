@@ -60,7 +60,7 @@ const SidePanel: React.FC = () => {
             P
           </div>
           <div>
-            <h1 className="text-base font-bold text-white">PriceRadar AI</h1>
+            <h1 className="text-base font-bold text-white">PriceHawk</h1>
             <p className="text-[10px] text-slate-400">Advanced Market Price Intelligence</p>
           </div>
         </div>

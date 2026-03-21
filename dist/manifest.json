@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "PriceRadar AI",
+  "name": "PriceHawk \u2014 AI Price Tracker & Market Analysis",
   "version": "1.0.0",
-  "description": "AI-powered market price analysis, comparison, and dynamic pricing intelligence",
+  "description": "AI price tracker & market analyzer: compare prices, track drops & get dynamic pricing insights across Amazon, eBay & more.",
   "permissions": [
     "sidePanel",
     "activeTab",
@@ -39,7 +39,9 @@
         "*://*.walmart.com/*",
         "*://*.bestbuy.com/*"
       ],
-      "js": ["content.js"]
+      "js": [
+        "content.js"
+      ]
     }
   ],
   "declarative_net_request": {
@@ -55,5 +57,6 @@
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
-  }
+  },
+  "short_name": "PriceHawk"
 }

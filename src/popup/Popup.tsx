@@ -33,7 +33,7 @@ const Popup: React.FC = () => {
           P
         </div>
         <div>
-          <h1 className="text-lg font-bold text-white">PriceRadar AI</h1>
+          <h1 className="text-lg font-bold text-white">PriceHawk</h1>
           <p className="text-xs text-slate-400">Market Price Intelligence</p>
         </div>
         <button
@@ -96,7 +96,7 @@ const Popup: React.FC = () => {
 
       {/* Footer */}
       <div className="mt-3 pt-2 border-t border-slate-800 text-center">
-        <span className="text-[10px] text-slate-600">Powered by PriceRadar AI Engine</span>
+        <span className="text-[10px] text-slate-600">Powered by PriceHawk Engine</span>
       </div>
     </div>
   );
