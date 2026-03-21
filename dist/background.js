@@ -1,0 +1,1 @@
+chrome.sidePanel.setPanelBehavior({openPanelOnActionClick:!1}).catch(()=>{});chrome.runtime.onMessage.addListener((r,a,i)=>(r.action==="openSidePanel"&&(chrome.tabs.query({active:!0,currentWindow:!0},e=>{var n;(n=e[0])!=null&&n.id&&chrome.sidePanel.open({tabId:e[0].id})}),i({success:!0})),!0));chrome.runtime.onInstalled.addListener(()=>{console.log("PriceRadar AI installed")});

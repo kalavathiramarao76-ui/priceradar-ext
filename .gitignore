@@ -1,0 +1,4 @@
+node_modules/
+*.svg
+generate-icons.js
+gen-png.js
