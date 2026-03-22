@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PriceHawk - AI Price Tracker | Chrome Web Store</title>
+<style>
+  :root { --accent: #06b6d4; --accent-light: #22d3ee; --accent-dark: #0891b2; --bg: #0f172a; --card: #1e293b; --card-hover: #334155; --text: #f1f5f9; --text-muted: #94a3b8; --border: #334155; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .hero { padding: 80px 0 60px; text-align: center; background: linear-gradient(180deg, rgba(6,182,212,0.15) 0%, transparent 100%); position: relative; }
+  .hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 50% 50%, rgba(6,182,212,0.08) 0%, transparent 50%); }
+  .hero-icon { width: 96px; height: 96px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 24px; display: flex; align-items: center; justify-content: center; font-size: 48px; margin: 0 auto 24px; box-shadow: 0 20px 60px rgba(6,182,212,0.3); position: relative; }
+  .hero h1 { font-size: 56px; font-weight: 800; margin-bottom: 8px; background: linear-gradient(135deg, #fff, var(--accent-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero .subtitle { font-size: 20px; color: var(--accent-light); font-weight: 600; margin-bottom: 16px; }
+  .hero .tagline { font-size: 18px; color: var(--text-muted); max-width: 620px; margin: 0 auto 32px; }
+  .badge-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .badge { background: var(--card); border: 1px solid var(--border); padding: 8px 16px; border-radius: 100px; font-size: 13px; color: var(--text-muted); }
+  .badge strong { color: var(--accent-light); }
+  .section { padding: 60px 0; }
+  .section-title { font-size: 32px; font-weight: 700; text-align: center; margin-bottom: 12px; }
+  .section-desc { text-align: center; color: var(--text-muted); margin-bottom: 48px; font-size: 16px; }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .feature-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; transition: all 0.3s; }
+  .feature-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(6,182,212,0.15); }
+  .feature-card .icon { font-size: 32px; margin-bottom: 12px; }
+  .feature-card h3 { font-size: 18px; margin-bottom: 8px; }
+  .feature-card p { font-size: 14px; color: var(--text-muted); }
+  .feature-card .tag { display: inline-block; background: rgba(6,182,212,0.15); color: var(--accent-light); padding: 2px 10px; border-radius: 100px; font-size: 12px; margin-top: 8px; }
+  .flow-steps { display: flex; gap: 0; justify-content: center; flex-wrap: wrap; padding: 20px 0; }
+  .flow-step { display: flex; align-items: center; }
+  .flow-step-content { text-align: center; padding: 20px; }
+  .flow-num { width: 48px; height: 48px; background: linear-gradient(135deg, var(--accent), var(--accent-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; margin: 0 auto 12px; color: #0f172a; }
+  .flow-step-content h4 { font-size: 15px; margin-bottom: 4px; }
+  .flow-step-content p { font-size: 13px; color: var(--text-muted); max-width: 140px; margin: 0 auto; }
+  .flow-arrow { color: var(--accent); font-size: 24px; padding: 0 4px; margin-top: -30px; }
+  .mock-section { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .mock-window { background: var(--card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+  .mock-titlebar { background: #0f172a; padding: 10px 16px; display: flex; align-items: center; gap: 8px; }
+  .mock-dot { width: 12px; height: 12px; border-radius: 50%; }
+  .mock-dot.r { background: #ef4444; } .mock-dot.y { background: #eab308; } .mock-dot.g { background: #22c55e; }
+  .mock-titlebar span { color: var(--text-muted); font-size: 12px; margin-left: 12px; }
+  .mock-body { padding: 20px; }
+  .mock-label { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; font-weight: 600; }
+  .mock-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .mock-btn { padding: 6px 14px; border-radius: 8px; font-size: 12px; border: 1px solid var(--border); background: var(--bg); color: var(--text-muted); }
+  .mock-btn.active { background: var(--accent); border-color: var(--accent); color: #0f172a; font-weight: 600; }
+  .mock-generate { background: linear-gradient(135deg, var(--accent), var(--accent-dark)); color: #0f172a; border: none; padding: 10px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; width: 100%; margin-top: 8px; }
+
+  /* Price UI */
+  .price-card { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-bottom: 10px; }
+  .price-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .price-label { font-size: 12px; color: var(--text-muted); }
+  .price-value { font-size: 14px; font-weight: 700; }
+  .price-value.green { color: #22c55e; }
+  .price-value.red { color: #ef4444; }
+  .price-value.cyan { color: var(--accent-light); }
+  .value-badge { display: inline-block; padding: 4px 12px; border-radius: 6px; font-size: 13px; font-weight: 700; }
+  .value-badge.good { background: rgba(34,197,94,0.15); color: #22c55e; }
+  .value-badge.wait { background: rgba(234,179,8,0.15); color: #eab308; }
+
+  .store-section { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; margin-top: 20px; }
+  .store-section h3 { font-size: 20px; margin-bottom: 16px; color: var(--accent-light); }
+  .store-block { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 20px; position: relative; }
+  .store-block h4 { font-size: 14px; color: var(--accent-light); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+  .store-block p, .store-block li { font-size: 14px; color: var(--text-muted); line-height: 1.8; }
+  .store-block ul { list-style: none; padding: 0; }
+  .store-block ul li::before { content: '✓ '; color: var(--accent-light); font-weight: bold; }
+  .copy-hint { position: absolute; top: 12px; right: 12px; font-size: 11px; color: var(--text-muted); background: var(--card); padding: 2px 8px; border-radius: 4px; }
+  .release-item { border-left: 3px solid var(--accent); padding: 16px 20px; margin-bottom: 16px; background: var(--card); border-radius: 0 8px 8px 0; }
+  .release-item .version { font-size: 14px; font-weight: 700; color: var(--accent-light); }
+  .release-item .date { font-size: 12px; color: var(--text-muted); margin-left: 8px; }
+  .release-item ul { margin-top: 8px; padding-left: 16px; }
+  .release-item li { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+  .divider { height: 1px; background: var(--border); margin: 0; }
+  @media (max-width: 768px) { .hero h1 { font-size: 36px; } .mock-section { grid-template-columns: 1fr; } .flow-steps { flex-direction: column; align-items: center; } .flow-arrow { transform: rotate(90deg); } }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-icon">&#129413;</div>
+    <h1>PriceHawk</h1>
+    <div class="subtitle">AI Price Tracker</div>
+    <p class="tagline">AI price tracker for smart shopping. Analyze prices, compare products, predict price drops, and get buy/wait recommendations on Amazon, eBay, and more.</p>
+    <div class="badge-row">
+      <div class="badge"><strong>1-10</strong> Value Score</div>
+      <div class="badge"><strong>30-Day</strong> Prediction</div>
+      <div class="badge"><strong>5</strong> Stores Supported</div>
+      <div class="badge"><strong>3</strong> Alert Thresholds</div>
+      <div class="badge">Buy/Wait Advice</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Powerful Features</h2>
+    <p class="section-desc">AI-powered price intelligence for smarter purchasing decisions</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="icon">&#128200;</div>
+        <h3>Price Analysis</h3>
+        <p>Get market price range, trend analysis, and a value score (1-10) for any product. Know if you're getting a good deal.</p>
+        <span class="tag">Value Score 1-10</span>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#128259;</div>
+        <h3>Product Comparison</h3>
+        <p>Compare multiple products side-by-side with detailed feature and price tables. Find the best value.</p>
+        <span class="tag">Multi-Product</span>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#128201;</div>
+        <h3>Dynamic Pricing</h3>
+        <p>Understand price volatility, demand patterns, and get 30-day price predictions. Time your purchases perfectly.</p>
+        <span class="tag">30-Day Forecast</span>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#128276;</div>
+        <h3>Alert Strategy</h3>
+        <p>Set 3 custom price thresholds with drop likelihood analysis at 30, 60, and 90 days. Know when to buy.</p>
+        <span class="tag">3 Thresholds</span>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#128722;</div>
+        <h3>E-Commerce Integration</h3>
+        <p>Works on Amazon, eBay, Walmart, Best Buy, and Shopify stores. Injected analysis button on product pages.</p>
+        <span class="tag">5 Stores</span>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#128336;</div>
+        <h3>Query History</h3>
+        <p>Keep your last 10 price analyses for reference. Track products over time without re-analyzing.</p>
+        <span class="tag">10 Queries</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-desc">Smart shopping decisions in 5 steps</p>
+    <div class="flow-steps">
+      <div class="flow-step"><div class="flow-step-content"><div class="flow-num">1</div><h4>Visit Product</h4><p>Go to any product page</p></div></div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step"><div class="flow-step-content"><div class="flow-num">2</div><h4>Analyze</h4><p>Click "Analyze Price"</p></div></div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step"><div class="flow-step-content"><div class="flow-num">3</div><h4>Market Analysis</h4><p>See price range & trends</p></div></div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step"><div class="flow-step-content"><div class="flow-num">4</div><h4>Compare</h4><p>Compare alternatives</p></div></div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step"><div class="flow-step-content"><div class="flow-num">5</div><h4>Alert</h4><p>Set price alert strategy</p></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">See It in Action</h2>
+    <p class="section-desc">Price intelligence right on the product page</p>
+    <div class="mock-section">
+      <div>
+        <p class="mock-label">PRICE ANALYSIS</p>
+        <div class="mock-window">
+          <div class="mock-titlebar">
+            <div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div>
+            <span>PriceHawk - Analysis</span>
+          </div>
+          <div class="mock-body">
+            <div style="text-align:center;margin-bottom:16px">
+              <div style="font-size:14px;color:var(--text-muted);margin-bottom:4px">Sony WH-1000XM5</div>
+              <div style="font-size:28px;font-weight:800;color:var(--accent-light)">$328.00</div>
+              <div style="margin-top:4px"><span class="value-badge good">Value Score: 7/10</span></div>
+            </div>
+            <div class="price-card">
+              <div class="price-row"><span class="price-label">Market Low</span><span class="price-value green">$298</span></div>
+              <div class="price-row"><span class="price-label">Market Average</span><span class="price-value cyan">$345</span></div>
+              <div class="price-row"><span class="price-label">Market High</span><span class="price-value red">$399</span></div>
+              <div class="price-row"><span class="price-label">Current Trend</span><span class="price-value green">&#8595; Declining</span></div>
+            </div>
+            <div class="price-card">
+              <div style="font-size:12px;color:var(--accent-light);font-weight:600;margin-bottom:8px">30-DAY PREDICTION</div>
+              <div class="price-row"><span class="price-label">Predicted Price</span><span class="price-value green">$309</span></div>
+              <div class="price-row"><span class="price-label">Drop Likelihood</span><span class="price-value cyan">72%</span></div>
+              <div class="price-row"><span class="price-label">Recommendation</span><span class="value-badge wait">Wait 2 Weeks</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="mock-label">ALERT STRATEGY</p>
+        <div class="mock-window">
+          <div class="mock-titlebar">
+            <div class="mock-dot r"></div><div class="mock-dot y"></div><div class="mock-dot g"></div>
+            <span>PriceHawk - Alerts</span>
+          </div>
+          <div class="mock-body">
+            <div style="font-size:13px;color:var(--text);font-weight:600;margin-bottom:12px">&#128276; Alert Thresholds</div>
+            <div class="price-card">
+              <div class="price-row"><span class="price-label">&#128994; Buy Now</span><span class="price-value green">$299 or below</span></div>
+              <div style="font-size:11px;color:var(--text-muted)">30-day drop likelihood: 45%</div>
+            </div>
+            <div class="price-card">
+              <div class="price-row"><span class="price-label">&#128992; Good Deal</span><span class="price-value cyan">$310 or below</span></div>
+              <div style="font-size:11px;color:var(--text-muted)">60-day drop likelihood: 68%</div>
+            </div>
+            <div class="price-card">
+              <div class="price-row"><span class="price-label">&#128308; Wait</span><span class="price-value" style="color:#eab308">$320 or below</span></div>
+              <div style="font-size:11px;color:var(--text-muted)">90-day drop likelihood: 82%</div>
+            </div>
+            <div style="margin-top:12px;font-size:12px;color:var(--text-muted)">
+              <strong style="color:var(--text)">Supported Stores:</strong>
+              <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
+                <span class="mock-btn" style="font-size:10px;padding:4px 10px">Amazon</span>
+                <span class="mock-btn" style="font-size:10px;padding:4px 10px">eBay</span>
+                <span class="mock-btn" style="font-size:10px;padding:4px 10px">Walmart</span>
+                <span class="mock-btn" style="font-size:10px;padding:4px 10px">Best Buy</span>
+                <span class="mock-btn" style="font-size:10px;padding:4px 10px">Shopify</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">What's New</h2>
+    <p class="section-desc">Latest updates and improvements</p>
+    <div class="release-item">
+      <span class="version">v1.0.0</span><span class="date">March 2026</span>
+      <ul>
+        <li>Initial release with AI price analysis and value scoring (1-10)</li>
+        <li>Product comparison with multi-product tables</li>
+        <li>Dynamic pricing analysis with 30-day prediction</li>
+        <li>Alert strategy with 3 thresholds and drop likelihood (30/60/90 days)</li>
+        <li>E-commerce integration: Amazon, eBay, Walmart, Best Buy, Shopify</li>
+        <li>Injected "Analyze Price" button on product pages</li>
+        <li>Query history storing last 10 analyses</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="container">
+    <div class="store-section">
+      <h3>&#127983; Chrome Web Store Listing (Copy-Paste Ready)</h3>
+      <div class="store-block">
+        <span class="copy-hint">&#128203; Copy</span>
+        <h4>Short Description (132 chars)</h4>
+        <p>AI price tracker for smart shopping. Analyze prices, compare products, predict price drops, and get buy/wait recommendations on Amazon, eBay, and more.</p>
+      </div>
+      <div class="store-block">
+        <span class="copy-hint">&#128203; Copy</span>
+        <h4>Detailed Description</h4>
+        <p>PriceHawk is an AI-powered price tracker that helps you make smarter purchasing decisions. Get instant price analysis, compare alternatives, predict price drops, and know exactly when to buy or wait.</p>
+        <br>
+        <p><strong>Price Analysis:</strong> Understand the full market picture with price range data, trend analysis, and a value score (1-10) for any product.</p>
+        <br>
+        <p><strong>Product Comparison:</strong> Compare multiple products side-by-side with detailed feature and price comparison tables.</p>
+        <br>
+        <p><strong>Dynamic Pricing:</strong> Analyze price volatility, demand patterns, and get 30-day price predictions to time your purchases.</p>
+        <br>
+        <p><strong>Alert Strategy:</strong> Set 3 custom price thresholds with AI-powered drop likelihood analysis at 30, 60, and 90 day intervals.</p>
+        <br>
+        <p><strong>E-Commerce Integration:</strong> Works on Amazon, eBay, Walmart, Best Buy, and Shopify stores with an injected analysis button on product pages.</p>
+        <br>
+        <p><strong>Query History:</strong> Keep your last 10 price analyses for reference and tracking.</p>
+      </div>
+      <div class="store-block">
+        <span class="copy-hint">&#128203; Copy</span>
+        <h4>Feature Bullet Points</h4>
+        <ul>
+          <li>AI price analysis with market range and value score (1-10)</li>
+          <li>Multi-product comparison with detailed feature tables</li>
+          <li>Dynamic pricing analysis: volatility, demand patterns, 30-day prediction</li>
+          <li>Alert strategy with 3 thresholds and drop likelihood (30/60/90 days)</li>
+          <li>Works on Amazon, eBay, Walmart, Best Buy, and Shopify</li>
+          <li>Injected "Analyze Price" button on product pages</li>
+          <li>Buy/wait recommendations based on market trends</li>
+          <li>Query history storing last 10 analyses</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="text-align:center; padding: 40px; color: var(--text-muted); font-size: 13px;">
+  PriceHawk &mdash; AI Price Tracker &mdash; Chrome Extension
+</div>
+
+</body>
+</html>
