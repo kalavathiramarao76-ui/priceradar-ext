@@ -1,3 +1,5 @@
+<p align="center"><img src="public/icons/logo.svg" width="128" height="128" alt="PriceHawk Logo"></p>
+
 # PriceHawk — AI Price Tracker & Analyzer
 
 ![Version](https://img.shields.io/badge/version-1.0.0-06B6D4)
@@ -132,11 +134,12 @@ priceradar-ext/
 ## Screenshots
 
 <p align="center">
-  <img src="public/icons/icon128.png" alt="PriceHawk Icon" width="128" height="128" />
+  <img src="public/icons/logo.svg" alt="PriceHawk Logo" width="128" height="128" />
 </p>
 
-| Icon Size | Path |
+| Icon | Path |
 |---|---|
+| SVG Logo | `public/icons/logo.svg` |
 | 16x16 | `public/icons/icon16.png` / `public/icons/icon16.svg` |
 | 48x48 | `public/icons/icon48.png` / `public/icons/icon48.svg` |
 | 128x128 | `public/icons/icon128.png` / `public/icons/icon128.svg` |
